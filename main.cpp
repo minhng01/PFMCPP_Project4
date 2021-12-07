@@ -1,95 +1,130 @@
-/*
- Project 4 - Part 1 / 9
- video: Chapter 2 Part 7
- Returning Values tasks 
-
- Create a branch named Part1
-
- Purpose:  This project will take you through the process of writing a class that wraps a numeric type, beginning with writing simple member functions and ending with a fully templated class with lots of functionality. 
+ /*
+ Project 3 - Part 2 / 5
+ Video: Chapter 2 Part 6
+ Implementations tasks
  
- 1) write 3 UDTs named FloatType, DoubleType, IntType.
- 
- 2) give each UDT the following member functions:
-        add( lhs, rhs );
-        subtract( lhs, rhs );
-        multiply( lhs, rhs );
-        divide( lhs, rhs );
+Create a branch named Part2
 
-       lhs is the left-hand-side of the operation, rhs is the right-hand-side
-       e.g. x = 2 + 3
-              '2' is the lhs
-              '3' is the rhs
-              '+' is the operation
-
- 3) implement the appropriate action in the member function. 
-         a) Be aware that floating point division by 0 is legal, but integer division by 0 will crash your program.  
-         b) Handle this possible input when you write your divide() functions.
-         c) you should warn the user if they're doing floating-point-division-by-zero but not prevent the division from happening
-         d) you should warn AND prevent the division from happening if it is an integer-division-by-zero.
- 
- 4) make them return the correct primitive type. e.g. if you're implementing the FloatType::add function, your implementation would start like this:
-        float FloatType::add( float lhs, float rhs )
- 
- 5) Do not edit main().  your job is to make your UDTs work correctly with the existing main.
-       the expected program output is listed after main along with instructions on how to verify it.
-
- 6) After you finish defining each type/function, click the [run] button.  Clear up any errors or warnings as best you can.
- */
-
-/*
-your program should generate the following output EXACTLY.
-This includes the warnings.
-Use a service like https://www.diffchecker.com/diff to compare your output. 
-you should have no errors or warnings.
-
-
-clang++ -std=c++17 -Weverything -Wno-c++98-compat -Wno-missing-prototypes main.cpp && ./a.out
-result of ft.add(): 555.556
-result of ft.subtract(): -308.644
-result of ft.multiply(): 53345.3
-result of ft.divide(): 0.285712
-result of ft.add(): 4444.56
-result of ft.subtract(): 4444.56
-result of ft.multiply(): 0
-result of ft.divide(): 
-warning, floating point division by zero returns 'inf' !
-inf
-result of db.add(): 555.556
-result of db.subtract(): -308.644
-result of db.multiply(): 53345.3
-result of db.divide(): 0.285712
-result of db.add(): 123.456
-result of db.subtract(): 123.456
-result of db.multiply(): 0
-result of db.divide(): 
-warning, floating point division by zero returns 'inf' !
-inf
-result of i.add(): 30
-result of i.subtract(): -10
-result of i.multiply(): 200
-result of i.divide(): 0
-result of i.add(): 10
-result of i.subtract(): 10
-result of i.multiply(): 0
-result of i.divide(): error, integer division by zero will crash the program!
-returning lhs
-10
-good to go!
+ tasks
+ 0) delete all of the plain english pseudo-code you added in Part1.
+   don't forget to remove the blank lines left behind after you remove your comments
+   - you should be left with only your UDTs.
 */
-
+// example:
+// if you had something like this at the end of Part1e:
 /*
- MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
-
- Commit your changes by clicking on the Source Control panel on the left, entering a message, and click [Commit and push].
- 
- If you didn't already: 
-    Make a pull request after you make your first commit
-    pin the pull request link and this repl.it link to our DM thread in a single message.
-
- send me a DM to review your pull request when the project is ready for review.
-
- Wait for my code review.
+Thing: Car Wash   
+    5 properties:
+        - number of vacuum cleaners
+        - number of eco-friendly cleaning supplies
+        - stores the amount of water used per week.
+        - stores amount of profit made per week
+        - number of cars serviced per day
+    3 things it can do:
+        - wash and wax car
+        - charge customer
+        - detail the car interior
  */
+
+#include <iostream>
+#include <string>
+namespace Part1eVersion 
+{
+struct CarWash        
+{
+    //number of vacuum cleaners                     
+    int numVacuumCleaners = 3; 
+    //number of eco-friendly cleaning supplies      
+    int numEcoFriendlyCleaningSupplies = 20;     
+    //stores the amount of water used per week.     
+    float waterUsedPerWeek = 200.f;            
+    //stores amount of profit made per week         
+    float profitPerWeek = 495.95f;               
+    //number of cars serviced per day               
+    int numberOfCarsServiced = 10;               
+    
+    struct Car  
+    {
+        bool isAPickupTruck = false;
+        float gasMileage = 26.2f;        
+        int year = 1985;
+        std::string manufacturer = "Toyota";
+        std::string model = "Corolla";
+
+        void fillTank(double fuelAmountInGallons = 2.0);  
+        void breakDown(std::string failureType, bool requiresTow = false);
+        int getMilesTraveledAnnually(bool includeUberLyftTrips);
+    };
+
+    //wash and wax car
+    void washAndWaxCar( Car car ); 
+    //charge customer
+    float chargeCustomer(float discountPercentage);
+    //detail the car interior
+    void detailInterior( Car car );
+    
+    Car carBeingServiced;  
+};
+}
+
+//this is what I want to see after the code is cleaned up: 
+namespace Part2Version
+{
+struct CarWash        
+{
+    int numVacuumCleaners = 3; 
+    int numEcoFriendlyCleaningSupplies = 20;     
+    float waterUsedPerWeek = 200.f;            
+    float profitPerWeek = 495.95f;               
+    int numberOfCarsServiced = 10;               
+    
+    struct Car  
+    {
+        bool isAPickupTruck = false;
+        float gasMileage = 26.2f;        
+        int year = 1985;
+        std::string manufacturer = "Toyota";
+        std::string model = "Corolla";
+
+        void fillTank(double fuelAmountInGallons = 2.0);  
+        void breakDown(std::string failureType, bool requiresTow = false);
+        int getMilesTraveledAnnually(bool includeUberLyftTrips);
+    };
+
+    void washAndWaxCar( Car car ); 
+    float chargeCustomer(float discountPercentage);
+    void detailInterior( Car car );
+    
+    Car carBeingServiced;  
+};
+}
+  /*
+    The above snippet is just an example showing you how to clean up your code.  
+    Do not put your cleaned up code into a namespace like I have done here.
+
+ 1) write the definition for the Type that leftFoot and rightFoot are instantiations of.
+    don't forget to define and implement the member functions 'stepForward()' and 'stepSize()'
+    you should be able to deduce the return type of those functions based on their usage in Person::run()
+    You'll need to insert the Person struct from the video in the space below.
+ */
+
+
+
+
+
+ /*
+ 2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
+    If you have warnings about 'unused parameter', you aren't using one of your function parameters in your implementation.
+    use the parameter in your implementation.
+    If you have warnings about 'overshadow', a local variable in the function has the same name as a class member.
+    change the name of your local variable so it is different from the class member's name.
+ 
+ 3) be sure to write the correct full qualified name for the nested type's member functions.
+ 
+ 4) After you finish defining each type/function, click the [run] button.  Clear up any errors or warnings as best you can.
+ if your code produces a -Wpadded warning, add '-Wno-padded' to the .replit file with the other compiler flags (-Weverything -Wno-missing-prototypes etc etc)
+ */
+
 
 #include <iostream>
 
