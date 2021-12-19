@@ -168,7 +168,7 @@ int main()
 
 #include <iostream>
 
-struct FloatType
+/*struct FloatType
 {
     float add(float lhs, float rhs)
     {
@@ -192,9 +192,18 @@ struct FloatType
         
         return lhs / rhs;
     }
+};*/
+struct FloatType
+{
+    FloatType(float x) : value(new float(x)) {}
+    ~FloatType()
+    {
+        delete value;
+    }
+    float* value = nullptr;
 };
 
-struct DoubleType
+/*struct DoubleType
 {
     double add(double lhs, double rhs)
     {
@@ -218,9 +227,18 @@ struct DoubleType
 
         return lhs / rhs;
     }
+};*/
+struct DoubleType
+{
+    DoubleType(double x) : value(new double(x)) {}
+    ~DoubleType()
+    {
+        delete value;
+    }
+    double* value = nullptr;
 };
 
-struct IntType
+/*struct IntType
 {
     int add(int lhs, int rhs)
     {
@@ -248,6 +266,15 @@ struct IntType
 
         return lhs / rhs;
     }
+};*/
+struct IntType
+{
+    IntType(int x) : value(new int(x)) {}
+    ~IntType()
+    {
+        delete value;
+    }
+    int* value = nullptr;
 };
 
 int main() 
